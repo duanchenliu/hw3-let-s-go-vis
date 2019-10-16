@@ -1,0 +1,41 @@
+.domestic {
+    fill: steelblue;
+}
+
+.foreign {
+    fill: firebrick;
+}
+
+.map {
+    fill: rgba(58, 30, 30, 0.749);
+}
+
+.map:hover {
+    fill: forestgreen;
+    
+}
+
+.node {
+    fill: yellow;
+    stroke: rgb(255, 173, 30);
+}
+
+h1 {
+    text-align: center;
+    color: yellow;
+}
+
+.link{
+    transform: rotate(180deg) rotate(-180deg);
+    transform-origin: 50% 50%;
+}
+
+body{
+    background-color: #0abab5;
+}
+
+svg{
+    display: block;
+    margin: auto;
+}
+
