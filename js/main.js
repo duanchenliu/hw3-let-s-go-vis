@@ -27,6 +27,13 @@ Promise.all([
     console.log(countryinfo);
     console.log(worldmap);
 
+    // let colorPalette = d3.scaleOrdinal(d3.schemeSet3)
+    //                 .domain([countryinfo.population]);
+                    
+    let divScheme = d3.scaleDiverging()
+            .domain([d3.min(countryinfo, function(d){ return d.population}),(500000),d3.max(countryinfo, function(d){ return d.population})]) // mid-point : 50
+            .interpolator(d3.interpolateRdBu)
+
     let world = topojson.feature(worldmap, worldmap.objects.countries).features;
 
     let nodeSizeScale = d3.scaleSqrt()
@@ -40,9 +47,11 @@ Promise.all([
     svg.selectAll("path")
         .data(world.filter(d=>d.properties.name!='Antarctica'))
 		.enter()
-		.append("path")
+        .append("path")
 		.attr("class", "map")
-		.attr("d", path)
+        .attr("d", path)
+        // .attr("fill", "blue")
+        // .attr("fill", (d)=>colorPalette(d.population))
 		.attr('stroke', 'white');
     
     let node = svg.selectAll(".node")
@@ -50,7 +59,7 @@ Promise.all([
           .enter()
           .append("circle")
           .attr("class", "node")
-          .attr("r", d => nodeSizeScale(d.population))
+          .attr("r", d => nodeSizeScale(d.population/1.5))
           .attr("fill", "gold")
           .attr("stroke", "gold")
           .attr("transform", function(d) {

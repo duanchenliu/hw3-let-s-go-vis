@@ -6,9 +6,9 @@
     fill: firebrick;
 }
 
-.map {
+/* .map {
     fill: rgba(58, 30, 30, 0.749);
-}
+} */
 
 .map:hover {
     fill: forestgreen;
