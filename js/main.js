@@ -1,7 +1,7 @@
 // import { csv, json } from 'd3';
 // import { feature } from 'topojson';
 
-let width = 1000,
+let width = 1000, 
 height = 600;
 
 let svg = d3.select("#chart-area").append("svg")
@@ -24,7 +24,6 @@ Promise.all([
     console.log(data, 'data');
     let countryinfo = data[0]; //storing all the info from our dataset
     let worldmap = data[1]; //storing the map info -> to draw the map.
-    // let fulldata = 
 
     console.log(countryinfo);
     console.log(worldmap);
@@ -38,15 +37,15 @@ Promise.all([
     //         .domain([d3.min(countryinfo, function(d){ return d.population}),(500000),d3.max(countryinfo, function(d){ return d.population})]) // mid-point : 50
     //         .interpolator(d3.interpolateRdBu);
     // console.log()
-    // let min =d3.min(countryinfo, function(d){ return d.population})
+    let min =d3.min(countryinfo, function(d){ return d.population})
     // // let min = d3.min(countryinfo, d=>d.population);
-    // let max = d3.max(countryinfo, function(d){ return d.population})
+    let max = d3.max(countryinfo, function(d){ return d.population})
     // console.log(min, max, 'YESSS SIR')
-    // let color = d3.scaleLinear()
-    //             .domain([max,min])
-    //             // .domain([[-1, 0, 1]])
-    //             // .clamp(true)
-    //             .range(['#74a9f7', '#fcba03']);
+    let color = d3.scaleLinear()
+                .domain([max,min])
+                // .domain([[-1, 0, 1]])
+                // .clamp(true)
+                .range(['#74a9f7', '#fcba03']);
     // console.log(color);
 
     let world = topojson.feature(worldmap, worldmap.objects.countries).features;
@@ -90,9 +89,9 @@ Promise.all([
         .attr("d", path)
         // .attr("fill", "blue")
         // .attr("fill", (d)=>colorPalette(d.population))
-        // .attr("fill", (d) => {
-        //     // console.log(d, 'here')
-        //     return fillcolor(d.properties.name)})
+        .attr("fill", (d) => {
+            // console.log(d, 'here')
+            return fillcolor(d.properties.name)})
 		.attr('stroke', 'white');
     
     
