@@ -1,8 +1,8 @@
 // import { csv, json } from 'd3';
 // import { feature } from 'topojson';
 
-let width = 1500,
-height = 1000;
+let width = 1000,
+height = 600;
 
 let svg = d3.select("#chart-area").append("svg")
     .attr("width", width)
@@ -13,7 +13,7 @@ let svg = d3.select("#chart-area").append("svg")
      .append("g");
 
 let projection = d3.geoMercator()
-	.scale(175)
+	.scale(150)
     .translate([width/2, height/2]);
     
 let path = d3.geoPath()
@@ -26,14 +26,16 @@ Promise.all([
     d3.json("data/world-110m.json"),
 ]).then((data)=>{
 
+
     let countryinfo = data[0]; //storing all the info from our dataset
     let worldmap = data[1]; //storing the map info -> to draw the map.
+
 
 
     let world = topojson.feature(worldmap, worldmap.objects.countries).features;
 
     let nodeSizeScale = d3.scaleSqrt()
-        .domain([0,  d3.max(countryinfo, function(d){ return d.population})])
+        .domain([0,  d3.max(countryinfo, function(d){ return d.Population})])
         .range([0, 2]);
        
     // let y = d3.scaleLinear()
@@ -52,19 +54,20 @@ Promise.all([
         //bind hover event here
         .on("mouseover",mouseOverEvent)
         .on("mouseout", mouseOutEvent);
-    
 
-
-
-
+    // svg.call(
+    //         d3.zoom().on('zoom', () => {
+    //           g.attr('transform', d3.event.transform);
+    //         })
+    //       );
     
     let node = svg.selectAll(".node")
         //we need to change this number to find the best way to present the visualization.
-          .data(countryinfo.filter(d=>d.population>10000000)) 
+          .data(countryinfo.filter(d=>d.Population>10000000)) 
           .enter()
           .append("circle")
           .attr("class", "node")
-          .attr("r", d => nodeSizeScale(d.population*1.5))
+          .attr("r", d => nodeSizeScale(d.Population/1.5))
           .attr("fill", "gold")
           .attr("stroke", "gold")
           .attr("opacity", 0.7)
@@ -81,21 +84,24 @@ Promise.all([
                             .style('z-index', '10')
                             .style('color', 'black')
                                 .style('visibility', 'hidden')   
-                                .style('font-size', '20px')
+                                .style('font-size', '18px')
                             .style('font-weight', 'bold')
                             .text('')
    
    
        function clicked(d){
+
         //    console.log(d);
            return tooltip.text("the country is:" + d.properties.name)
                         .style("left",(d3.event.pageX)+"px")
     					.style("top",(d3.event.pageY+20)+"px")
                         .style("visibility", "visible")
+
        }
       function mouseOverEvent(d){
        //    console.log("111111");
        return tooltip.text("Country name: " + d.properties.name)
+
        .style("left",(d3.event.pageX)+"px")
        .style("top",(d3.event.pageY+20)+"px")
        .style("visibility", "visible")
@@ -108,6 +114,7 @@ Promise.all([
 
 function mouseOutEvent(d){
 return tooltip.style("opacity", 0);
+
       }
    
       /////deal with scatter plots
