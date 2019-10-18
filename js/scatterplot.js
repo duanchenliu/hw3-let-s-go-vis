@@ -3,7 +3,7 @@ let width = 700,
 	height = 500;
 let padding = 30;
 
-let scatterPlot = d3.csv("../data/country.csv", (row)=>{
+let scatterPlot = d3.csv("data/country.csv", (row)=>{
 	// type conversion
 	return{
 		...row,
