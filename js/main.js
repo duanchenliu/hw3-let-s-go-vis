@@ -25,16 +25,16 @@ Promise.all([
     d3.csv("data/country.csv"),
     d3.json("data/world-110m.json"),
 ]).then((data)=>{
-    // console.log(data);
+    console.log(data);
     let countryinfo = data[0]; //storing all the info from our dataset
     let worldmap = data[1]; //storing the map info -> to draw the map.
-    // console.log("country info:  "+countryinfo);
-    // console.log("world map:  "+worldmap);
+    console.log("country info:  " + countryinfo);
+    console.log("world map:  " + worldmap);
 
     let world = topojson.feature(worldmap, worldmap.objects.countries).features;
 
     let nodeSizeScale = d3.scaleSqrt()
-        .domain([0,  d3.max(countryinfo, function(d){ return d.population})])
+        .domain([0,  d3.max(countryinfo, function(d){ return d.Population})])
         .range([0, 2]);
        
     // let y = d3.scaleLinear()
@@ -62,11 +62,11 @@ Promise.all([
     
     let node = svg.selectAll(".node")
         //we need to change this number to find the best way to present the visualization.
-          .data(countryinfo.filter(d=>d.population>10000000)) 
+          .data(countryinfo.filter(d=>d.Population>10000000)) 
           .enter()
           .append("circle")
           .attr("class", "node")
-          .attr("r", d => nodeSizeScale(d.population/1.5))
+          .attr("r", d => nodeSizeScale(d.Population/1.5))
           .attr("fill", "gold")
           .attr("stroke", "gold")
           .attr("opacity", 0.7)
