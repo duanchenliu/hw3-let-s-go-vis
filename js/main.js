@@ -1,8 +1,8 @@
 // import { csv, json } from 'd3';
 // import { feature } from 'topojson';
 
-let width = 500,
-height = 600;
+let width = 560,
+height = 500;
 
 //define highlighted place
 let highLight = ""

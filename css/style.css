@@ -7,16 +7,16 @@
 }
 
 .map {
-    fill: rgba(58, 30, 30, 0.749);
+    fill: gray;
 }
 
 .map:hover {
-    fill: forestgreen;
+    fill: black;
     
 }
 
 .node {
-    fill: yellow;
+    fill: blue;
     stroke: rgb(255, 173, 30);
 }
 

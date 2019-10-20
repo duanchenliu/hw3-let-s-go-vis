@@ -1,5 +1,5 @@
 // SVG Size
-let width = 700,
+let width = 560,
 	height = 500;
 let padding = 30;
 
@@ -78,8 +78,6 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 		.attr("id", "scatterplot")
 		.attr("clip-path", "url(#clip)");
 
-
-	
 	scatter.selectAll("circle")
 		.data(newArray)
 		.enter()
@@ -92,9 +90,6 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 		.attr("cy", (d)=>happynessScale(d.HappinessScore))
 		.attr("id",(d)=>d.Country)
 		
-		
-
-
 	svg.append('g')
 			.attr('class', 'x-axis axis')
 			.attr('id', "axis--x")
@@ -121,15 +116,6 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 				.attr("y", 50)
 				// .attr("dy", ".75em")
 				.text("Happiness Score");
-
-	
-	
-		
-	
-	
-		
-		
-		
 
 	scatter.append('g')
 		.attr("class", "brush")
