@@ -164,7 +164,13 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 		.attr("cx", (d)=>GDPScale(d.GDPPerCapita))
 		.attr("cy", (d)=>happynessScale(d.HappinessScore));
 	}
-
+	// console.log(newArray);//153 correct
+	let text = svg.selectAll("text")
+				.data(data, function(d){
+					// console.log(d)
+				})
+				.enter()
+                .append("text");
 
 //we need to update it as soon as clicked
 //we can change the color of the selected country like this
@@ -175,30 +181,32 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 	if (highLight != ""){
 		scatter.select("#"+highLight)
 				// .enter()
-				.attr("fill", "black");
-		let text = svg.selectAll("text")
-				.data(newArray)
-				.enter()
-                .append("text");
+				.attr("fill", "red")
+		// console.log(typeof(highLight));
+		
 		let textlabel = text
 				.attr("x", (d)=>GDPScale(d.GDPPerCapita))
                 .attr("y", (d)=>happynessScale(d.HappinessScore))
 		 		.text(function (d) {
-					return (d.Country + d.HappinessScore + d.Population + d.GDPPerCapita)
+					 console.log(d);
+					return (d.Country + "- Happiness: " + d.HappinessScore + ". " + "Population: " + d.Population  + ". " + "GDP/Capita: $"+  d.GDPPerCapita + ". ")
+					// return ("1");
 				 })
                 .attr("font-family", "sans-serif")
                 .attr("font-size", "20px")
 				.attr("fill", "black")
 				.style("opacity", function(d,index){
 					// console.log(highLight);
-					// console.log("country: "+ d.Country + "highlight: " + highLight);
+					console.log("country: "+ d.Country + " highlight: " + highLight);
 					if (d.Country===highLight){
-						// console.log("get here");
+						
 						return 1;
 					}else{
+						console.log("get here");
 						return 0;
 					}
 				});
+	
 		// svg.selectAll("text")
 		// 	.data(newArray)
 		// 	.enter()
