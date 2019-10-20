@@ -189,11 +189,11 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
                 .attr("y", (d)=>happynessScale(d.HappinessScore))
 		 		.text(function (d) {
 					 console.log(d);
-					return (d.Country + "- Happiness: " + d.HappinessScore + ". " + "Population: " + d.Population  + ". " + "GDP/Capita: $"+  d.GDPPerCapita + ". ")
+					return (d.Country + " - Happiness: " + d.HappinessScore + ". " + "Population: " + d.Population  + ". " + "GDP/Capita: $"+  d.GDPPerCapita + ". ")
 					// return ("1");
 				 })
                 .attr("font-family", "sans-serif")
-                .attr("font-size", "20px")
+                .attr("font-size", "12px")
 				.attr("fill", "black")
 				.style("opacity", function(d,index){
 					// console.log(highLight);
