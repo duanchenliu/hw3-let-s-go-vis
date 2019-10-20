@@ -30,10 +30,6 @@ h1 {
     transform-origin: 50% 50%;
 }
 
-body{
-    background-color: #0abab5;
-}
-
 svg{
     display: block;
     margin: auto;
