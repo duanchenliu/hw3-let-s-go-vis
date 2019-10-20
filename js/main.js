@@ -4,6 +4,10 @@
 let width = 1000,
 height = 600;
 
+//define highlighted place
+let highLight = ""
+
+
 let svg = d3.select("#chart-area").append("svg")
     .attr("width", width)
     .attr("height", height)
@@ -25,7 +29,6 @@ Promise.all([
     d3.csv("data/country.csv"),
     d3.json("data/world-110m.json"),
 ]).then((data)=>{
-
 
     let countryinfo = data[0]; //storing all the info from our dataset
     let worldmap = data[1]; //storing the map info -> to draw the map.
@@ -49,9 +52,6 @@ Promise.all([
 		.attr("class", "map")
 		.attr("d", path)
         .attr('stroke', 'white')
-        //bind onclick event here
-        // .on("click", clicked)
-        //bind hover event here
         .on("mouseover",mouseOverEvent)
         .on("mouseout", mouseOutEvent);
 
@@ -73,7 +73,8 @@ Promise.all([
           .attr("opacity", 0.7)
           .attr("transform", function(d) {
              return "translate(" + projection([d.capital_long, d.capital_lat]) + ")";
-           });
+           })
+          .on("click", clicked);
            
 
 
@@ -91,11 +92,11 @@ Promise.all([
    
        function clicked(d){
 
-        //    console.log(d);
-           return tooltip.text("the country is:" + d.properties.name)
-                        .style("left",(d3.event.pageX)+"px")
-    					.style("top",(d3.event.pageY+20)+"px")
-                        .style("visibility", "visible")
+           highLight = d.Country;
+           console.log(highLight);
+        //pass data to cookie
+            document.cookie = highLight;
+
 
        }
       function mouseOverEvent(d){

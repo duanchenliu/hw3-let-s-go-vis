@@ -13,7 +13,7 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 	};
 })
 .then(data=>{
-	//console.log(data);
+	// console.log("11111" + data);
 	let newArray = data;
 
 	let margin = {top:20, bottom:20, left:10, right:20};
@@ -22,14 +22,14 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 
 	let happinessMin = d3.min(data, function(d){ return d.HappinessScore});
 	let happinessMax = d3.max(data, function(d){ return d.HappinessScore});
-	console.log(happinessMin,happinessMax);
+	// console.log(happinessMin,happinessMax);
 	let GDPCapitaMin = d3.min(data, function(d){ return d.GDPPerCapita}) ;
 	let GDPCapitaMax = d3.max(data, function(d){ return d.GDPPerCapita});
-	console.log(GDPCapitaMin, GDPCapitaMax);
+	// console.log(GDPCapitaMin, GDPCapitaMax);
 	let populationMin = d3.min(data, d=>d.Population);
 	let populationMax = d3.max(data, d=>d.Population);
 	//let populationMean = (populationMin + populationMax)/2;
-	console.log(populationMin, populationMax);
+	// console.log(populationMin, populationMax);
 
 	let svg = d3.select('#second-chart-area').append('svg')
 	.attr('width', width + margin.left + margin.right) 
@@ -84,11 +84,11 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 		.attr("fill", (d)=>colorPalette(d.Population))
 		.attr("text", (d)=>d.Country)
 		.attr("r", (d)=>populationScale(d.Population))
+		//cx and cy define the dots position here
 		.attr("cx", (d)=>GDPScale(d.GDPPerCapita))
 		.attr("cy", (d)=>happynessScale(d.HappinessScore))
+		.attr("id",(d)=>d.Country)
 		
-
-				
 
 
 	svg.append('g')
@@ -161,4 +161,16 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 		.attr("cy", (d)=>happynessScale(d.HappinessScore));
 	}
 
+
+//we need to update it as soon as clicked
+//we can change the color of the selected country like this
+//read data from cookie
+//need exit/enter/update to 更新图片
+	let highLight = document.cookie;
+	console.log("From scatter:" + highLight);
+	if (highLight != ""){
+		scatter.select("#"+highLight)
+				// .enter()
+				.attr("fill", "black")
+	}
 })
