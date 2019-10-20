@@ -15,6 +15,9 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 .then(data=>{
 	// console.log("11111" + data);
 	let newArray = data;
+	newArray.sort(function (a, b) {
+		return b.Population - a.Population;
+	});
 
 	let margin = {top:20, bottom:20, left:10, right:20};
 		width = 960 - margin.left - margin.right;
@@ -88,6 +91,7 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 		.attr("cx", (d)=>GDPScale(d.GDPPerCapita))
 		.attr("cy", (d)=>happynessScale(d.HappinessScore))
 		.attr("id",(d)=>d.Country)
+		
 		
 
 
@@ -171,6 +175,50 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 	if (highLight != ""){
 		scatter.select("#"+highLight)
 				// .enter()
+				.attr("fill", "black");
+		let text = svg.selectAll("text")
+				.data(newArray)
+				.enter()
+                .append("text");
+		let textlabel = text
+				.attr("x", (d)=>GDPScale(d.GDPPerCapita))
+                .attr("y", (d)=>happynessScale(d.HappinessScore))
+		 		.text(function (d) {
+					return (d.Country + d.HappinessScore + d.Population + d.GDPPerCapita)
+				 })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "20px")
 				.attr("fill", "black")
+				.style("opacity", function(d,index){
+					// console.log(highLight);
+					// console.log("country: "+ d.Country + "highlight: " + highLight);
+					if (d.Country===highLight){
+						// console.log("get here");
+						return 1;
+					}else{
+						return 0;
+					}
+				});
+		// svg.selectAll("text")
+		// 	.data(newArray)
+		// 	.enter()
+		// 	.append("text")
+		// 	.text(function(d){
+		// 		return d.Country;
+		// 	})
+		// 	// .attr("x", function(d,index){
+		// 	// 	return d.x;
+		// 	// })
+		// 	// .attr("y", function(d,index){
+		// 	// 	return d.y - 15;
+		// 	// })
+		// 	.style("opacity", function(d,index){
+		// 		if (d.population>=1000000){
+		// 			return 1;
+		// 		}else{
+		// 			return 0;
+		// 		}
+		// 	}); 
+		 
 	}
 })

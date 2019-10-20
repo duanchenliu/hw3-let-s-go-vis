@@ -33,7 +33,7 @@ Promise.all([
     let countryinfo = data[0]; //storing all the info from our dataset
     let worldmap = data[1]; //storing the map info -> to draw the map.
 
-
+    console.log(countryinfo);
 
     let world = topojson.feature(worldmap, worldmap.objects.countries).features;
 
@@ -74,20 +74,22 @@ Promise.all([
           .attr("transform", function(d) {
              return "translate(" + projection([d.capital_long, d.capital_lat]) + ")";
            })
+        //    .on("mouseover", mouseOverNodeEvent)
           .on("click", clicked);
            
+    node.append("title")
+          .text(function(d) { return "Click here to see "+ d.Country +"'s scores."; });
 
-
-           let tooltip = d3.select('body')
-                            .append('div')
-                            .attr("class","tooltip")
-                            .style('position', 'absolute')
-                            .style('z-index', '10')
-                            .style('color', 'black')
-                                .style('visibility', 'hidden')   
-                                .style('font-size', '18px')
-                            .style('font-weight', 'bold')
-                            .text('')
+    let tooltip = d3.select('body')
+                    .append('div')
+                    .attr("class","tooltip")
+                    .style('position', 'absolute')
+                    .style('z-index', '10')
+                    .style('color', 'black')
+                    .style('visibility', 'hidden')   
+                    .style('font-size', '18px')
+                    .style('font-weight', 'bold')
+                    .text('')
    
    
        function clicked(d){
@@ -96,6 +98,7 @@ Promise.all([
            console.log(highLight);
         //pass data to cookie
             document.cookie = highLight;
+            history.go(0);
 
 
        }
@@ -118,10 +121,15 @@ return tooltip.style("opacity", 0);
 
       }
    
-      /////deal with scatter plots
       
+// function mouseOverNodeEvent(d){
+//         return (tooltip.text("Click to see scores")
+//                         .style("opacity", 1));
+//     }
    
 });
+
+
 
 
 
