@@ -33,7 +33,7 @@ Promise.all([
     let countryinfo = data[0]; //storing all the info from our dataset
     let worldmap = data[1]; //storing the map info -> to draw the map.
 
-    console.log(countryinfo);
+    // console.log(countryinfo);
 
     let world = topojson.feature(worldmap, worldmap.objects.countries).features;
 
@@ -132,8 +132,4 @@ return tooltip.style("opacity", 0);
 
 
 
-
-/////////////////////////////
-///scatter plot part here////
-/////////////////////////////
 

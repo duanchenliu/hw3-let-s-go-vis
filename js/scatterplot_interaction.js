@@ -77,7 +77,7 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 	var scatter = svg.append("g")
 		.attr("id", "scatterplot")
 		.attr("clip-path", "url(#clip)");
-
+	
 	scatter.selectAll("circle")
 		.data(newArray)
 		.enter()
@@ -150,7 +150,7 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 		.attr("cx", (d)=>GDPScale(d.GDPPerCapita))
 		.attr("cy", (d)=>happynessScale(d.HappinessScore));
 	}
-	// console.log(newArray);//153 correct
+	
 	let text = svg.selectAll("text")
 				.data(data, function(d){
 					// console.log(d)
@@ -193,26 +193,7 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 					}
 				});
 	
-		// svg.selectAll("text")
-		// 	.data(newArray)
-		// 	.enter()
-		// 	.append("text")
-		// 	.text(function(d){
-		// 		return d.Country;
-		// 	})
-		// 	// .attr("x", function(d,index){
-		// 	// 	return d.x;
-		// 	// })
-		// 	// .attr("y", function(d,index){
-		// 	// 	return d.y - 15;
-		// 	// })
-		// 	.style("opacity", function(d,index){
-		// 		if (d.population>=1000000){
-		// 			return 1;
-		// 		}else{
-		// 			return 0;
-		// 		}
-		// 	}); 
+		
 		 
 	}
 })
