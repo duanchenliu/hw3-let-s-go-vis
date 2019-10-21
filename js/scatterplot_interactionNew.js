@@ -170,7 +170,7 @@ function drawGraph(xText,yText){
 
 
 
-    drawGraph('Population', 'GDPPerCapita');
+    drawGraph('GDPPerCapita', 'GDPPerCapita');
     function setScatterGraph() {
         xVal = d3.select("#x-value").node().value; 
         yVal = d3.select("#y-value").node().value; 
