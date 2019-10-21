@@ -77,7 +77,7 @@ let scatterPlot = d3.csv("data/country.csv", (row)=>{
 	var scatter = svg.append("g")
 		.attr("id", "scatterplot")
 		.attr("clip-path", "url(#clip)");
-
+	
 	scatter.selectAll("circle")
 		.data(newArray)
 		.enter()

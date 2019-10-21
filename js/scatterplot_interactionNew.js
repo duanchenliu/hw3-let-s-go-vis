@@ -8,7 +8,7 @@ function drawGraph(xText,yText){
   
     let width = 960,
         height = 500;
-    let padding = 30;
+    let padding = 100;
 
 
 
@@ -17,6 +17,7 @@ function drawGraph(xText,yText){
         data.forEach(function(d) {
           d[yText] = +d[yText];
           d[xText] = +d[xText];
+        //   d[Population] = +d[Population];
 
         });
       //play inside with the converted data!
@@ -39,13 +40,13 @@ function drawGraph(xText,yText){
     // setup xScale 
     let xScale = d3.scaleLinear()
     .domain([0,xMax])
-    .range([height-padding, padding]).nice();
+    .range([padding,height-padding]).nice();
 
 
     // setup yScale
     let yScale = d3.scaleLinear()
     .domain([-1000,yMax])
-    .range([padding,width - padding]).nice();
+    .range([width - padding,padding]).nice();
 
 	// setup fill color
 	let color = "red";
@@ -67,6 +68,14 @@ function drawGraph(xText,yText){
     .ticks(9)
     .scale(yScale);
 
+    //setup population
+	let populationMin = d3.min(data, d=>d.Population);
+	let populationMax = d3.max(data, d=>d.Population);
+
+    	let populationScale = d3.scaleLinear()
+			.domain([populationMin,populationMax])
+			.range([4, 30]).nice();
+
     var brush = d3.brush().extent([[0, 0], [width, height]]).on("end", brushended),
     idleTimeout,
     idleDelay = 350;
@@ -74,6 +83,7 @@ function drawGraph(xText,yText){
 	yScale.domain(d3.extent(data, function (d) { return d[yText]; })).nice();
 
 
+    
 	var scatter = svg.append("g")
 		.attr("id", "scatterplot")
 		.attr("clip-path", "url(#clip)");
@@ -84,7 +94,8 @@ function drawGraph(xText,yText){
 		.append("circle")
 		.attr("fill", "red")
 		.attr("text", (d)=>d.Country)
-		.attr("r", "10")
+        .attr("r", "4")
+        // .attr("r", (d)=>populationScale(d.Population))
 		//cx and cy define the dots position here
 		.attr("cx", (d)=>xScale(d[xText]))
 		.attr("cy", (d)=>yScale(d[yText]))

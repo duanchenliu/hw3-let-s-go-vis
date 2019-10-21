@@ -39,6 +39,10 @@ function drawGraph(xText, yText) {
 		.attr("class", "tooltip")
 		.style("opacity", 0);
 
+
+
+
+        
 	// load data
 	d3.csv("passing-stats-2014.csv", function(error, data) {
 
