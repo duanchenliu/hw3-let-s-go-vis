@@ -1,6 +1,6 @@
 
 
-function drawGraph(xText,yText){
+function drawGraph(xText,yText,highLight){
     // SVG Size
    
 
@@ -199,8 +199,7 @@ function drawGraph(xText,yText){
 //we can change the color of the selected country like this
 //read data from cookie
 //need exit/enter/update to 更新图片
-let highLight = document.cookie;
-console.log("From scatter:" + highLight);
+
 if (highLight != ""){
     scatter.select("#"+highLight)
             // .enter()
@@ -211,7 +210,6 @@ if (highLight != ""){
             .attr("x", (d)=>GDPScale(d.GDPPerCapita))
             .attr("y", (d)=>happynessScale(d.HappinessScore))
              .text(function (d) {
-                 console.log(d);
                 return (d.Country + " - Happiness: " + d.HappinessScore + ". " + "Population: " + d.Population  + ". " + "GDP/Capita: $"+  d.GDPPerCapita + ". ")
                 // return ("1");
              })
@@ -220,12 +218,10 @@ if (highLight != ""){
             .attr("fill", "black")
             .style("opacity", function(d,index){
                 // console.log(highLight);
-                console.log("country: "+ d.Country + " highlight: " + highLight);
                 if (d.Country===highLight){
                     
                     return 1;
                 }else{
-                    console.log("get here");
                     return 0;
                 }
             });
@@ -237,15 +233,36 @@ if (highLight != ""){
 
 });
     }
-
-
-
-    drawGraph('GDPPerCapita', 'GDPPerCapita');
+    
+    let highLight = "China";
+    drawGraph('GDPPerCapita', 'GDPPerCapita',highLight);
+    
     function setScatterGraph() {
         xVal = d3.select("#x-value").node().value; 
         yVal = d3.select("#y-value").node().value; 
-        drawGraph(xVal, yVal);
+        document.cookie = "xVal="+xVal;
+        document.cookie = "yVal="+yVal;
 
-        // console.log(xVal,yVal);
+        drawGraph(xVal, yVal,highLight);
+    }
+
+
+
+//strCookie: your cookie
+//name, the name of variable, like"xVal", "yVal"
+    function getCookieByName(strCookie,name){
+
+        //name = country, xVal, yVal
+        var arrCookie=strCookie.split("; ");
+        var value;
+        for(var i=0;i<arrCookie.length;i++){
+            var arr=arrCookie[i].split("=");
+            // console.log("11111",name)
+            if(name == arr[0]){
+                   value=arr[1];
+                   break;
+            }
+   }
+        return value;
     }
     
