@@ -96,10 +96,13 @@ Promise.all([
 
            highLight = d.Country;
            console.log(highLight);
-        //pass data to cookie
-            document.cookie = highLight;
-            history.go(0);
+           document.cookie = "country="+highLight;
+            // history.go(0);
+            var strCookie=document.cookie;
+            let xVal = getCookieByName(strCookie,"xVal");
+            let yVal = getCookieByName(strCookie,"yVal");
 
+            drawGraph(xVal,yVal,highLight);
 
        }
       function mouseOverEvent(d){
