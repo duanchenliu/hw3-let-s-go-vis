@@ -6,13 +6,21 @@ function drawGraph(xText,yText){
 
     d3.select("#second-chart-area").select("svg").remove();
   
-    let width = 960,
+    let width = 560,
         height = 500;
     let padding = 100;
 
 
 
-    d3.csv("data/country.csv").then( function(data){
+    let scatterPlot = d3.csv("data/country.csv", (row)=>{
+        // type conversion
+        return{
+            ...row,
+            GDPPerCapita:+row.GDPPerCapita,
+            HappinessScore:+row.HappinessScore,
+            Population:+row.Population
+        };
+    }).then( function(data){
         // change string (from CSV) into number format
         data.forEach(function(d) {
           d[yText] = +d[yText];
@@ -21,9 +29,9 @@ function drawGraph(xText,yText){
 
         });
       //play inside with the converted data!
-      let margin = {top:20, bottom:20, left:10, right:20};
-      width = 800 - margin.left - margin.right;
-      height = 800 - margin.top - margin.bottom;
+      let margin = {top:20, bottom:20, left:20, right:20};
+      width = 600 - margin.left - margin.right;
+      height = 600 - margin.top - margin.bottom;
 
       let newArray = data;
       newArray.sort(function (a, b) {
@@ -70,17 +78,40 @@ function drawGraph(xText,yText){
 
     //setup population
 	let populationMin = d3.min(data, d=>d.Population);
-	let populationMax = d3.max(data, d=>d.Population);
+    let populationMax = d3.max(data, d=>d.Population);
+    console.log(populationMin);
+    console.log(populationMax);
 
-    	let populationScale = d3.scaleLinear()
-			.domain([populationMin,populationMax])
-			.range([4, 30]).nice();
+    let populationScale = d3.scaleLinear()
+		.domain([populationMin,populationMax])
+        .range([4, 30]).nice();
+        
+    //setup colorscale
+    let colorPalette = d3.scaleLog()
+		.domain([populationMin,populationMax])
+		.range(["#02FFFF", "#0247FF"]);
 
     var brush = d3.brush().extent([[0, 0], [width, height]]).on("end", brushended),
     idleTimeout,
     idleDelay = 350;
 	xScale.domain(d3.extent(data, function (d) { return d[xText]; })).nice();
-	yScale.domain(d3.extent(data, function (d) { return d[yText]; })).nice();
+    yScale.domain(d3.extent(data, function (d) { return d[yText]; })).nice();
+    
+    //setup GDPScale
+    let GDPCapitaMin = d3.min(data, function(d){ return d.GDPPerCapita}) ;
+	let GDPCapitaMax = d3.max(data, function(d){ return d.GDPPerCapita});
+
+    let GDPScale = d3.scaleLinear()
+    .domain([-1000,GDPCapitaMax])
+    .range([padding,width - padding]).nice();
+
+    //setup happinessscale
+
+    let happinessMin = d3.min(data, function(d){ return d.HappinessScore});
+    let happinessMax = d3.max(data, function(d){ return d.HappinessScore});
+    let happynessScale = d3.scaleLinear()
+			.domain([0,happinessMax])
+			.range([height-padding, padding]).nice();
 
 
     
@@ -92,10 +123,10 @@ function drawGraph(xText,yText){
 		.data(newArray)
 		.enter()
 		.append("circle")
-		.attr("fill", "red")
+		.attr("fill", (d)=>colorPalette(d.Population))
 		.attr("text", (d)=>d.Country)
         .attr("r", "4")
-        // .attr("r", (d)=>populationScale(d.Population))
+        .attr("r", (d)=>populationScale(d.Population))
 		//cx and cy define the dots position here
 		.attr("cx", (d)=>xScale(d[xText]))
 		.attr("cy", (d)=>yScale(d[yText]))
@@ -163,6 +194,45 @@ function drawGraph(xText,yText){
 				})
 				.enter()
                 .append("text");
+
+//we need to update it as soon as clicked
+//we can change the color of the selected country like this
+//read data from cookie
+//need exit/enter/update to 更新图片
+let highLight = document.cookie;
+console.log("From scatter:" + highLight);
+if (highLight != ""){
+    scatter.select("#"+highLight)
+            // .enter()
+            .attr("fill", "red")
+    // console.log(typeof(highLight));
+    
+    let textlabel = text
+            .attr("x", (d)=>GDPScale(d.GDPPerCapita))
+            .attr("y", (d)=>happynessScale(d.HappinessScore))
+             .text(function (d) {
+                 console.log(d);
+                return (d.Country + " - Happiness: " + d.HappinessScore + ". " + "Population: " + d.Population  + ". " + "GDP/Capita: $"+  d.GDPPerCapita + ". ")
+                // return ("1");
+             })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "11px")
+            .attr("fill", "black")
+            .style("opacity", function(d,index){
+                // console.log(highLight);
+                console.log("country: "+ d.Country + " highlight: " + highLight);
+                if (d.Country===highLight){
+                    
+                    return 1;
+                }else{
+                    console.log("get here");
+                    return 0;
+                }
+            });
+
+    
+     
+}
 
 
 });
