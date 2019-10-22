@@ -23,8 +23,6 @@ let projection = d3.geoMercator()
 let path = d3.geoPath()
 	.projection(projection);
     
-
-
 Promise.all([
     d3.csv("data/country.csv"),
     d3.json("data/world-110m.json"),
