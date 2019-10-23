@@ -144,6 +144,8 @@ function drawGraph(xText,yText){
         .attr('id', "axis--y")
         .attr("transform", "translate(" + padding + ",0)")
         .call(yaxis);
+
+        
         svg.append('text')
         .attr("x", 700)
         .attr("y", 420)	 

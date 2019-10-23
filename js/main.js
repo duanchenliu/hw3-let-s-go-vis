@@ -95,11 +95,13 @@ Promise.all([
        function clicked(d){
 
            highLight = d.Country;
-           console.log(highLight);
+        //    console.log("11111111", highLight);
         //pass data to cookie
-            document.cookie = highLight;
-            history.go(0);
-
+            // document.cookie = highLight;
+            // history.go(0);
+            updateVisualization(highLight);
+            console.log("clickedddd");
+            drawInfoBox(d);
 
        }
       function mouseOverEvent(d){
@@ -128,6 +130,30 @@ return tooltip.style("opacity", 0);
 //     }
    
 });
+let box = d3.select("#textPlace")
+    .attr("width", width)
+    .attr("height", height);
+
+function drawInfoBox(d){
+    // box.data(d)
+    //     .enter()
+    //     .append('div')
+    //     .text(function(d){
+    //         console.log("gote hterere r")
+    //         return d;
+    //     })
+    console.log(d);
+    var element = document.getElementById("textPlace")
+    let SuperText = "Country: "+d.Country + "</br>"+"Population:  "+d.Population + "</br>"+ "Freedom: "+ d.Freedom+  "</br>"+"GDPPerCapita: "+d.GDPPerCapita;
+    element.innerHTML = SuperText;
+    // var test = document.querySelector("#textPlace")
+    //     test.append("Country: ",d.Country);
+    //     test.append("Population:  ",d.Population);
+    //     test.append("Freedom: ", d.Freedom);
+    //     test.append("GDPPerCapita: ",d.GDPPerCapita);
+    //     test.exit.remove();
+
+}
 
 
 
