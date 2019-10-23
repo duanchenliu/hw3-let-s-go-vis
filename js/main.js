@@ -95,6 +95,7 @@ Promise.all([
        function clicked(d){
 
            highLight = d.Country;
+
         //    console.log("11111111", highLight);
         //pass data to cookie
             // document.cookie = highLight;
@@ -102,6 +103,7 @@ Promise.all([
             updateVisualization(highLight);
             console.log("clickedddd");
             drawInfoBox(d);
+
 
        }
       function mouseOverEvent(d){

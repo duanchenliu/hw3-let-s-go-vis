@@ -3,3 +3,6 @@ this is the link for scatterplot
 
 dropdown Menu example
 http://bl.ocks.org/majetisiri/57da501b3182bd08d17402261c7187f7
+
+cookie:
+https://www.cnblogs.com/xiaochaohuashengmi/archive/2010/06/13/1757658.html
