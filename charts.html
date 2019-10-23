@@ -22,6 +22,9 @@
 
   <link rel="stylesheet" href="css/style.css">
 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
 </head>
 
 <body id="page-top">
@@ -82,31 +85,13 @@
           <li class="breadcrumb-item">Charts</li>
           <li class="breadcrumb-item active">Overview</li>
         </ol>
-
-        <!-- Area Chart Example-->
+        <!-- 
         <div class="card mb-3">
           <div class="card-header">
             Finally, a visualization!</div>
           <div class="card-body">
-             <!-- Icon Cards-->
              <div class="row">
-                <div class="col-sm col-md col-lg" style="margin-top: 1vh">
-                    <ul>
-                        <li>Map:</li>
-                    </ul>
-                    <p>
-                    Zoom in and out, and drag the map to find the country you want to see more about.
-                    Hover over a country to see its name.
-                    Click on a country's capital to see its correspondent “World Happiness Report” data on the scatterplot!
-                    </p>
-                    <ul>
-                        <li>Scatter plot: </li>
-                    </ul>
-                    <p>
-                    The size of the bubbles represents population. 
-                    Choose the X-Axis and Y-Axis to see correlation between variables like happiness rank, GDP per Capita, Family-friendly, Freedom, and Generosity. 
-                    Brush an area on the scatter plot → zoom in. Double click on the scatter plot → zoom out. 
-                  </p>
+                <div class="col-sm-3 col-md-6 col-lg-9" style="margin-top: 1vh">
                 <div id="chart-area" style="margin-top: 3vh"></div>
                    <div class="card bg-light mb-3" style="max-width: 30rem">
                       <div class="card-header">Click on any map bubble for more information!</div>
@@ -121,12 +106,12 @@
                         <div id="stacked-area-chart"></div>
                         <div id="timeline"></div>
                     
-                 <div class="col-sm col-md col-lg ">
+                 <div class="col-sm-3 col-md-6 col-lg-9">
                   <div class='row'>
                       <div class = "col-6" id = "menu" style='margin-left: 50vh'>
                           <p><span><label for="x-axis">Select X-Axis</label></span>
                             <select id="x-value">
-                              <!-- <option value="Population">Population</option> -->
+   
                               <option value="GDPPerCapita">GDPPerCapita</option>
                               <option value="HappinessRank">HappinessRank</option>
                               <option value="Family">Family</option> 
@@ -135,7 +120,7 @@
                             </select>
                           <p><span><label for="y-axis">Select Y-Axis</label></span>
                           <select id="y-value">
-                              <!-- <option value="Population">Population</option> -->
+                            
                               <option value="GDPPerCapita">GDPPerCapita</option>
                               <option value="HappinessRank">HappinessRank</option>
                               <option value="Family">Family</option> 
@@ -153,6 +138,66 @@
           <div class="card-footer small text-muted">Data as of 2017</div>
           
         </div>
+      -->
+      <div class="card mb-3">
+          <div class="card-header">
+              Finally, a visualization!
+          </div>
+          <div class="card-body">
+              <div>
+                  <p>
+                  Map: Zoom in and out, and drag the map to find the country you want to see more about.
+                  Hover over a country to see its name.
+                  Click on a country's capital to see its correspondent “World Happiness Report” data on the scatterplot!
+                  </p>
+                  <p>
+                  Scatter plot: The size of the bubbles represents population. 
+                  Choose the X-Axis and Y-Axis to see correlation between variables like happiness rank, GDP per Capita, Family-friendly, Freedom, and Generosity. 
+                  Brush an area on the scatter plot → zoom in. Double click on the scatter plot → zoom out. 
+                </p>
+              </div>
+             <div class="row">
+                <div class="col-xs-4">
+                <div id="chart-area" style="margin-top: 3vh; margin-left:5vh"></div>
+                   <div class="card bg-light mb-3" style="max-width: 30rem">
+                      <div class="card-header">Click on any map bubble for more information!</div>
+                      <div class="card-body">
+                        <div id="textPlace"></div>
+                      </div>
+                    </div>
+                 </div> 
+                <div class="col-xs-4">
+                <div style="margin-top: -13vh">
+                    <div id="second-chart-area"></div>
+                        <div id="third-chart-area"></div>
+                        <div id="stacked-area-chart"></div>
+                        <div id="timeline"></div>      
+                    <div id = "menu" style="margin-left: 40vh">
+                          <p><span><label for="x-axis">Select X-Axis</label></span>
+                            <select id="x-value">
+                              <option value="GDPPerCapita">GDPPerCapita</option>
+                              <option value="HappinessRank">HappinessRank</option>
+                              <option value="Family">Family</option> 
+                              <option value="Freedom">Freedom</option>
+                              <option value="Generosity">Generosity</option>
+                            </select>
+                          <p><span><label for="y-axis">Select Y-Axis</label></span>
+                          <select id="y-value">
+                              <option value="GDPPerCapita">GDPPerCapita</option>
+                              <option value="HappinessRank">HappinessRank</option>
+                              <option value="Family">Family</option> 
+                              <option value="Freedom">Freedom</option>
+                              <option value="Generosity">Generosity</option>
+                          </select>
+                         
+                        </div>
+                        <button id = "button" style="margin-left: 64vh">submit</button>
+                      </div>
+                    </div> 
+                </div>  
+            </div>
+          <div class="card-footer small text-muted">Data as of 2017</div> 
+      </div>
       <!-- Sticky Footer -->
       <footer class="sticky-footer">
         <div class="container my-auto">

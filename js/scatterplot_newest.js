@@ -1,6 +1,6 @@
 let margin = {top:20, bottom:20, left:20, right:20};
-      width = 800 - margin.left - margin.right;
-      height = 800 - margin.top - margin.bottom;
+      width = 600 - margin.left - margin.right;
+      height = 600 - margin.top - margin.bottom;
       let padding = 100;
 
 
