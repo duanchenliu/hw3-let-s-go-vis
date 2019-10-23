@@ -28,18 +28,13 @@
 
     <a class="navbar-brand mr-1" href="index.html">Data Visualization HW3: "World Happiness"</a>
 
-    <!-- Navbar -->
-    <ul class="navbar-nav ml-auto ml-md-0">
-      <li class="nav-item no-arrow mx-1">
-        <a class="nav-link" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-bell fa-fw"></i>
-        </a>
-      </li>
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-envelope fa-fw"></i>
-        </a>
-      </li>
+         <!-- Navbar -->
+    <ul class="navbar-nav ml-auto" >  
+        <li class="nav-item">
+            <a class="nav-link" href="https://www.kaggle.com/unsdsn/world-happiness">
+              <i class="fab fa-kaggle"> </i>
+            </a>
+        </li>
     </ul>
 
   </nav>
@@ -59,11 +54,21 @@
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span></a>
       </li>
+      <li class="nav-item">
+          <a class="nav-link" href="encodingv2.html">
+            <i class="fas fa-fw fa-pencil-alt"></i>
+            <span>Encoding Information</span></a>
+      </li>
       <li class="nav-item active">
         <a class="nav-link" href="analysisv2.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Analysis</span></a>
       </li>
+      <li class="nav-item ">
+          <a class="nav-link" href="considerationsv2.html">
+                  <i class="fas fa-sticky-note"></i>
+            <span>Considerations</span></a>
+    </li>
     </ul>
 
     <div id="content-wrapper">
@@ -72,7 +77,7 @@
 
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">Introduction</li>
+          <li class="breadcrumb-item">Analysis</li>
           <li class="breadcrumb-item active">Overview</li>
         </ol>
 
@@ -80,9 +85,65 @@
         <div class="card mb-3">
           <div class="card-header">
             <i ></i>
-            BLABLABLA</div>
+            What is going on?</div>
           <div class="card-body">
-            BLABLABLA
+              <ul>
+                  <li>GDP Per Capita versus Happiness</li>
+                  We can see in the screenshot that there is a general 
+                  trend that higher GDP Per Capita is positive correlated 
+                  with happiness scores. A similar trend is found in the 
+                  GDP Per Capita vs. happiness rank relationship. We can 
+                  see that a higher GDP Per Capita is associated with a 
+                  lower rank of happiness (please note: lowest rank 1 is 
+                  the best). It is also interesting to note that the relationship 
+                  has decreased marginal returns, meaning that after a certain 
+                  point, an increase in GDP has little effect on the change of 
+                  rank or score.
+              </ul>
+              <img src="pic1.png" style="width:auto;height:auto;">
+              <ul>
+                  <li>GDP Per Capita versus Family-Friendly</li>
+                  There is a general trend that a higher GDP Per Capita is associated 
+                  with a higher family-friendly score. Likewise the previous example, 
+                  the effect flattens out as GDP Per Capita gets bigger, which means 
+                  that when GDP Per Capita gets to around $20000, an increase in GDP 
+                  Per Capita will not have a significant association with increase in 
+                  the family-friendly score. 
+              </ul>
+              <img src="pic1.png" style="width:auto;height:auto;">
+              <ul>
+                  <li>GDP Per Capita versus Freedom</li>
+                  There is also a general trend that a higher GDP Per Capita is associated 
+                  with a higher freedom score (have more freedom). However, the association 
+                  is not strong. We can see that there are a lot of countries within the $0 - 
+                  $10000 GDP Per Capita range and their freedom score varies a lot from 0 to 
+                  around 0.65. This means that for some countries, although the country has 
+                  a low GDP Per Capita, the people living in it believe that they have a lot 
+                  of freedom. Oppositely, there are countries with high GDP Per Capita which 
+                  have low scores for freedom.
+              </ul>
+              <img src="pic1.png" style="width:auto;height:auto;">
+              <ul>
+                  <li>GDP Per Capita versus Generosity</li>
+                  [Circle] mark encodes [capital for each country].
+                  For countries with GDP Per Capita between $0 and $10000, we can see that a 
+                  lot of them have generosity score around 0.3, while there are outliers like 
+                  Indonesia that have a higher score of generosity compared to all of the countries 
+                  that have a higher GDP Per Capita. For countries with GDP Per Capita higher than 
+                  $10000, there is a little bit of the trend that higher GDP Per Capita may lead to 
+                  a higher generosity score. However, the relationship is very weak.  So, we do 
+                  not see a strong correlation between income and generosity. Thus, having more 
+                  money doesn’t mean that people will be more generous. 
+              </ul>
+              <img src="pic1.png" style="width:auto;height:auto;">
+              <ul>
+                  <li>Population Size</li>
+                  [Circle] mark encodes [capital for each country].
+                  As previously mentioned, in the scatterplot, the bubbles' area correspond to a 
+                  country's population size. It is interesting to note that there does not seem to 
+                  be any strong relationship of population size and GDP, happiness, family, freedom 
+                  or generosity.
+              </ul>
           </div>
           <div class="card-footer small text-muted"></div>
         </div>
