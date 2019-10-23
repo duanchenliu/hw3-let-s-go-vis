@@ -146,7 +146,9 @@ function drawInfoBox(d){
     //     })
     console.log(d);
     var element = document.getElementById("textPlace")
-    let SuperText = "Country: "+d.Country + "</br>"+"Population:  "+d.Population + "</br>"+ "Freedom: "+ d.Freedom+  "</br>"+"GDPPerCapita: "+d.GDPPerCapita;
+    var str = "Wikipedia Page";
+    var result = str.link(d.WikepediaPage);
+    let SuperText = "Country: "+d.Country + "</br>"+"Population:  "+d.Population + "</br>"+ "Freedom: "+ d.Freedom+  "</br>"+"GDPPerCapita: "+d.GDPPerCapita + "</br>" +"Click: "+ result + "</br>";
     element.innerHTML = SuperText;
     // var test = document.querySelector("#textPlace")
     //     test.append("Country: ",d.Country);
