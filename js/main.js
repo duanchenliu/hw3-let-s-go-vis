@@ -146,7 +146,7 @@ function drawInfoBox(d){
     //     })
     console.log(d);
     var element = document.getElementById("textPlace")
-    var str = "Wikipedia Page";
+    var str = "Click to see this country's Wikipedia page";
     var result = str.link(d.WikepediaPage);
     let SuperText = "Country: "+d.Country + "</br>"+"Population:  "+d.Population + "</br>"+ "Freedom: "+ d.Freedom+  "</br>"+"GDPPerCapita: "+d.GDPPerCapita + "</br>" + result + "</br>";
     element.innerHTML = SuperText;
